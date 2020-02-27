@@ -1,8 +1,12 @@
 console.log('Todo-list test');
 
 class ToDoList {
-  constructor() {
-
+  constructor(id, title, tasks, urgent) {
+    this.id = id;
+    this.title = '';
+    // each task in the array should be an object
+    this.tasks = [{}];
+    this.urgent = false;
   }
   savetoStorage() {
     // save to local storage
