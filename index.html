@@ -4,29 +4,43 @@
 <head>
   <meta charset="utf-8">
   <title>Check Yo Self</title>
-  <meta name="description" content="Check Yo Self">
+  <meta name="description" content="Check Yo' Self">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-  <h1>Check Yo' Self</h1>
-  <!-- add search image to search input -->
+  <h1>Check <span>Yo'</span> Self</h1>
+  <div class="search-bar">
+  <img class="search-btn" src="assets/search.svg">
   <input type="search" placeholder="Search">
+  </div>
   </header>
   <aside>
-    <h4>Task Title</h4>
-    <input type="text">
-    <h4>Task Item</h4>
-    <!-- add add image to task item input -->
-    <input type="text">
-    <button>Make Task List</button>
-    <button>Clear All</button>
-    <!-- add space between buttons -->
-    <button>Filter by Urgency</button>
+    <h4>To Do List Title</h4>
+    <input class="list-title-input" type="text" placeholder="Name of to do list">
+    <p hidden class="title-required">Please enter a title for your to do list</p>
+    <div class="task-draft-list"></div>
+    <h4>To Do List Task</h4>
+    <input class="task-item-input" type="text" placeholder="Task on to do list">
+    <p hidden class="task-required">Please enter an item for your to do list</p>
+    <button class="add-btn">+</button>
+    <button class="make-list-btn">Make To Do List</button>
+    <button class="clear-btn">Clear All</button>
+    <button class="filter-btn">Filter by Urgency</button>
   </aside>
   <main>
-    <!-- task sections -->
+    <p>You have no to do lists yet. Make a to do list to get started!</p>
+    <section class="task-card">
+      <h3>To Do List Title</h3>
+      <ul>
+        <li>To do list task</li>
+      </ul>
+    <div class="urgent-delete-btns">
+      <p class="urgent-btn"><img src="assets/urgent.svg">Urgent</p>
+      <p class="delete-btn"><img src="assets/delete.svg">Delete</p>
+    </div>
+    </section>
   </main>
   <script src="task.js"></script>
   <script src="todo-list.js"></script>
