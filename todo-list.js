@@ -1,10 +1,10 @@
 console.log('Todo-list test')
 
 class ToDoList {
-  constructor(title) {
+  constructor(title, tasks) {
     this.id = Date.now()
     this.title = title;
-    this.tasks = []
+    this.tasks = tasks
     this.urgent = false;
   }
   savetoStorage() {
@@ -23,7 +23,8 @@ class ToDoList {
   updateTask() {
     // should update a task's content and if it has been completed
   }
-  // addItemToTasks(task) {
-  //   this.tasks.push(task)
-  // }
+  addItemsToList() {
+    this.title = listTitleInput;
+    this.tasks.push(task)
+  }
 }
