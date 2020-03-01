@@ -4,7 +4,7 @@ class ToDoList {
   constructor(title, tasks) {
     this.id = Date.now()
     this.title = title;
-    this.tasks = tasks
+    this.tasks = tasks;
     this.urgent = false;
   }
   savetoStorage() {
