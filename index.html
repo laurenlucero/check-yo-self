@@ -18,29 +18,29 @@
   </header>
   <aside>
     <h4>To Do List Title</h4>
-    <input class="list-title-input" type="text" placeholder="Name of to do list">
+    <input class="title-input" type="text" placeholder="Name of to do list">
     <p hidden class="title-required">Please enter a title for your to do list</p>
     <div class="task-draft-list"></div>
     <h4>To Do List Task</h4>
-    <input class="task-item-input" type="text" placeholder="Task on to do list">
+    <input class="task-input" type="text" placeholder="Task on to do list">
     <p hidden class="task-required">Please enter an item for your to do list</p>
     <button class="add-btn">+</button>
-    <button class="make-list-btn">Make To Do List</button>
-    <button class="clear-btn">Clear All</button>
+    <button type="submit" class="make-list-btn">Make To Do List</button>
+    <button type="reset" class="clear-btn">Clear All</button>
     <button class="filter-btn">Filter by Urgency</button>
   </aside>
   <main>
     <p>You have no to do lists yet. Make a to do list to get started!</p>
-    <section class="task-card">
-      <h3>To Do List Title</h3>
-      <ul>
-        <li>To do list task</li>
-      </ul>
+    <!-- <section class="task-card">
+      <h3 class="list-title">Title</h3>
+      <div class="task-list">
+        <span><img src="assets/checkbox.svg">Task</span>
+      </div>
     <div class="urgent-delete-btns">
       <p class="urgent-btn"><img src="assets/urgent.svg">Urgent</p>
       <p class="delete-btn"><img src="assets/delete.svg">Delete</p>
     </div>
-    </section>
+    </section> -->
   </main>
   <script src="task.js"></script>
   <script src="todo-list.js"></script>

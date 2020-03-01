@@ -48,8 +48,8 @@ input {
   padding: 1em;
 }
 
-.list-title-input,
-.task-item-input {
+.title-input,
+.task-input {
   margin: .5em;
 }
 
@@ -118,11 +118,17 @@ h3 {
   padding: .5em;
 }
 
-ul {
+.task-list {
   border-bottom: solid #C7D3D8 .2em;
   border-top: solid #C7D3D8 .2em;
   list-style-type: none;
   padding: .5em;
+}
+
+.task-list img {
+  height: 1em;
+  width: 1em;
+  margin-right: .5em;
 }
 
 .urgent-delete-btns {
