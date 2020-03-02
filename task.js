@@ -1,5 +1,3 @@
-console.log('Task test')
-
 class Task {
   constructor(name) {
     this.taskName = name;

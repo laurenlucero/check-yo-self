@@ -1,27 +1,49 @@
-console.log('Main test')
-
-// var task = new Task()
-// var toDoList = new ToDoList()
+var toDoList = new ToDoList;
 var listTitleInput = document.querySelector('.title-input')
 var taskDraftList = document.querySelector('.task-draft-list')
 var taskItemInput = document.querySelector('.task-input')
 var addTaskItemBtn = document.querySelector('.add-btn')
 var makeToDoListBtn = document.querySelector('.make-list-btn')
 var clearToDoDraftBtn = document.querySelector('.clear-btn')
-var noToDosMsg = document.querySelector('.no-to-dos')
 var taskCards = document.querySelector('main')
 var draftTasks = []
+var toDoLists = []
 
 addTaskItemBtn.addEventListener('click', checkTaskItemInput)
 taskDraftList.addEventListener('click', removeTaskDraftItem)
 makeToDoListBtn.addEventListener('click', makeToDoList)
 clearToDoDraftBtn.addEventListener('click', clearToDoDraft)
 
+window.onload = toDoList.getFromStorage()
+
+function displayTaskCards(array) {
+ for (var i = 0; i < array.length; i++) {
+   taskCards.innerHTML+=
+ `<section class="task-card">
+   <h3 class="list-title">${array[i].title}</h3>
+   <div class="task-list" data-id='id-here'>${displayTasks(array[i].tasks)}</div>
+   <div class="urgent-delete-btns">
+     <p class="urgent-btn"><img src="assets/urgent.svg">Urgent</p>
+     <p class="delete-btn"><img src="assets/delete.svg">Delete</p>
+   </div>
+   </section>`
+ }
+}
+
+function displayTasks(array) {
+  var individualTask = '';
+  for (var i = 0; i < array.length; i++) {
+  individualTask +=
+  `<span><img src="assets/checkbox.svg">${array[i].taskName}</span>`
+  }
+  return individualTask
+}
+
 function checkTaskItemInput() {
   var taskRequired = document.querySelector('.task-required')
   if (taskItemInput.value === '') {
     taskRequired.hidden = false;
-    return false;
+    return;
  } else {
    taskRequired.hidden = true;
    addNewTaskItem()
@@ -61,19 +83,15 @@ function removeTaskFromDraftTasks(taskId) {
   }
 }
 
-// new card with title and tasks should display
-// page should not reload
-// todo card should be persisted when page reloads
-
 function makeToDoList() {
   if (listTitleInput.value === '' || taskDraftList.innerHTML === ``) {
     return
   } else {
-    var title = listTitleInput.value;
-    var toDoList = new ToDoList(title, draftTasks)
+    var toDoList = new ToDoList(listTitleInput.value, draftTasks)
+    toDoLists.push(toDoList)
     taskCards.innerHTML+=
   `<section class="task-card">
-    <h3 class="list-title">${title}</h3>
+    <h3 class="list-title">${listTitleInput.value}</h3>
     <div class="task-list" data-id=${toDoList.id}> </div>
     <div class="urgent-delete-btns">
       <p class="urgent-btn"><img src="assets/urgent.svg">Urgent</p>
@@ -86,8 +104,8 @@ function makeToDoList() {
       `<span><img src="assets/checkbox.svg">${toDoList.tasks[i].taskName}</span>`
     }
  }
+ toDoList.saveToStorage(toDoLists)
  clearToDoDraft()
- // noToDosAlert()
 }
 
 function clearToDoDraft() {
@@ -100,11 +118,3 @@ function clearToDoDraft() {
   draftTasks = [];
  }
 }
-
-// function noToDosAlert() {
-//   if (taskCards.classList.contains('task-card')) {
-//     noToDosMsg.hidden = true;
-//   } else {
-//     noToDosMsg.hidden = false;
-//   }
-// }
