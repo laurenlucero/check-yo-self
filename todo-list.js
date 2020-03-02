@@ -1,5 +1,3 @@
-console.log('Todo-list test')
-
 class ToDoList {
   constructor(title, tasks) {
     this.id = Date.now()
@@ -7,15 +5,18 @@ class ToDoList {
     this.tasks = tasks;
     this.urgent = false;
   }
-  savetoStorage() {
+  saveToStorage(array) {
     // save to local storage
-    localStorage.setItem('toDoList', JSON.stringify())
-    var stringifiedTasks = localStorage.getItem('toDoList') || '[]'
+    localStorage.setItem('list', JSON.stringify(array))
+  }
+  getFromStorage() {
+    var stringifiedTasks = localStorage.getItem('list') || '[]'
     var parsedTasks = JSON.parse(stringifiedTasks)
+    displayTaskCards(parsedTasks)
   }
   deleteFromStorage() {
     // remove from local storage
-    localStorage.removeItem('toDoList')
+    localStorage.removeItem('list')
   }
   updateToDo() {
     // should update the todo's title and urgency
