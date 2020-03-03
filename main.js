@@ -1,27 +1,43 @@
-var toDoList = new ToDoList;
+var toDoList = new ToDoList();
 var listTitleInput = document.querySelector('.title-input')
-var taskDraftList = document.querySelector('.task-draft-list')
 var taskItemInput = document.querySelector('.task-input')
+var taskDraftList = document.querySelector('.task-draft-list')
 var addTaskItemBtn = document.querySelector('.add-btn')
 var makeToDoListBtn = document.querySelector('.make-list-btn')
 var clearToDoDraftBtn = document.querySelector('.clear-btn')
 var taskCards = document.querySelector('main')
+var noToDosMsg = document.querySelector('.no-to-dos')
+var taskList = document.querySelector('.task-list')
 var draftTasks = []
 var toDoLists = []
 
+window.onload = toDoList.getFromStorage()
 addTaskItemBtn.addEventListener('click', checkTaskItemInput)
 taskDraftList.addEventListener('click', removeTaskDraftItem)
 makeToDoListBtn.addEventListener('click', makeToDoList)
 clearToDoDraftBtn.addEventListener('click', clearToDoDraft)
+taskList.addEventListener('click', markAsComplete)
 
-window.onload = toDoList.getFromStorage()
+function instantiateToDoLists() {
+  var instantiatedToDoLists = []
+  for (var i = 0; i < toDoLists.length; i++) {
+    var instantiatedTasks = []
+    for(var j = 0; j < toDoLists[i].tasks.length; j++) {
+      var task = new Task(toDoLists[i].tasks[j].taskName)
+      instantiatedTasks.push(task)
+    }
+    var toDoList = new ToDoList(toDoLists[i].id, toDoLists[i].title, instantiatedTasks)
+    instantiatedToDoLists.push(toDoList)
+  }
+  toDoLists = instantiatedToDoLists
+}
 
-function displayTaskCards(array) {
+function displaySavedToDoLists(array) {
  for (var i = 0; i < array.length; i++) {
    taskCards.innerHTML+=
  `<section class="task-card">
    <h3 class="list-title">${array[i].title}</h3>
-   <div class="task-list" data-id='id-here'>${displayTasks(array[i].tasks)}</div>
+   <div class="task-list" data-id=${array[i].id}>${displaySavedTasks(array[i].tasks)}</div>
    <div class="urgent-delete-btns">
      <p class="urgent-btn"><img src="assets/urgent.svg">Urgent</p>
      <p class="delete-btn"><img src="assets/delete.svg">Delete</p>
@@ -30,7 +46,7 @@ function displayTaskCards(array) {
  }
 }
 
-function displayTasks(array) {
+function displaySavedTasks(array) {
   var individualTask = '';
   for (var i = 0; i < array.length; i++) {
   individualTask +=
@@ -44,11 +60,11 @@ function checkTaskItemInput() {
   if (taskItemInput.value === '') {
     taskRequired.hidden = false;
     return;
- } else {
-   taskRequired.hidden = true;
-   addNewTaskItem()
- }
- taskItemInput.value = '';
+  } else {
+    taskRequired.hidden = true;
+    addNewTaskItem()
+  }
+  taskItemInput.value = '';
 }
 
 function addNewTaskItem() {
@@ -68,11 +84,11 @@ function removeTaskDraftItem(event) {
     var draftTaskItem = event.target.closest('.draft-task')
     var taskId = draftTaskItem.dataset.id;
     draftTaskItem.remove()
-    removeTaskFromDraftTasks(taskId)
+    removeTaskFromDrafts(taskId)
   }
 }
 
-function removeTaskFromDraftTasks(taskId) {
+function removeTaskFromDrafts(taskId) {
   var taskIdNumber = parseInt(taskId)
   for (var i = 0; i < draftTasks.length; i++) {
     var deletedTask = draftTasks[i]
@@ -87,7 +103,7 @@ function makeToDoList() {
   if (listTitleInput.value === '' || taskDraftList.innerHTML === ``) {
     return
   } else {
-    var toDoList = new ToDoList(listTitleInput.value, draftTasks)
+    var toDoList = new ToDoList(Date.now(), listTitleInput.value, draftTasks)
     toDoLists.push(toDoList)
     taskCards.innerHTML+=
   `<section class="task-card">
@@ -105,7 +121,16 @@ function makeToDoList() {
     }
  }
  toDoList.saveToStorage(toDoLists)
+ noToDosMessage()
  clearToDoDraft()
+}
+
+function noToDosMessage() {
+ if (toDoLists.length === 0) {
+   noToDosMsg.hidden = false
+ } else {
+   noToDosMsg.hidden = true
+ }
 }
 
 function clearToDoDraft() {
@@ -118,3 +143,11 @@ function clearToDoDraft() {
   draftTasks = [];
  }
 }
+
+function markAsComplete() {
+  if (event.target.className === '') {
+    tasksList.innerHTML+=
+    `<span><img src="assets/checkbox.svg">${}</span>`
+}
+
+// 'completed-task'

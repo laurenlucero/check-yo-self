@@ -1,6 +1,6 @@
 class ToDoList {
-  constructor(title, tasks) {
-    this.id = Date.now()
+  constructor(id, title, tasks) {
+    this.id = id;
     this.title = title;
     this.tasks = tasks;
     this.urgent = false;
@@ -9,10 +9,16 @@ class ToDoList {
     // save to local storage
     localStorage.setItem('list', JSON.stringify(array))
   }
-  getFromStorage() {
-    var stringifiedTasks = localStorage.getItem('list') || '[]'
+  getFromStorage(toDoList) {
+    var stringifiedTasks = localStorage.getItem('list')
     var parsedTasks = JSON.parse(stringifiedTasks)
-    displayTaskCards(parsedTasks)
+    toDoLists = parsedTasks || []
+    instantiateToDoLists()
+    displaySavedToDoLists(toDoLists)
+  }
+  addItemsToList() {
+    this.title = listTitleInput;
+    this.tasks.push(task)
   }
   deleteFromStorage() {
     // remove from local storage
@@ -23,9 +29,5 @@ class ToDoList {
   }
   updateTask() {
     // should update a task's content and if it has been completed
-  }
-  addItemsToList() {
-    this.title = listTitleInput;
-    this.tasks.push(task)
   }
 }
