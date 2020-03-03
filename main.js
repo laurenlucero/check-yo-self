@@ -1,4 +1,4 @@
-var toDoList = new ToDoList();
+var toDoList = new ToDoList()
 var listTitleInput = document.querySelector('.title-input')
 var taskItemInput = document.querySelector('.task-input')
 var taskDraftList = document.querySelector('.task-draft-list')
@@ -7,7 +7,6 @@ var makeToDoListBtn = document.querySelector('.make-list-btn')
 var clearToDoDraftBtn = document.querySelector('.clear-btn')
 var taskCards = document.querySelector('main')
 var noToDosMsg = document.querySelector('.no-to-dos')
-var taskListItem = document.querySelectorAll('.task-list-item')
 var draftTasks = []
 var toDoLists = []
 
@@ -16,14 +15,14 @@ addTaskItemBtn.addEventListener('click', checkTaskItemInput)
 taskDraftList.addEventListener('click', removeTaskDraftItem)
 makeToDoListBtn.addEventListener('click', makeToDoList)
 clearToDoDraftBtn.addEventListener('click', clearToDoDraft)
-taskListItem.addEventListener('click', markAsComplete)
+taskCards.addEventListener('click', markAsComplete)
 
 function instantiateToDoLists() {
   var instantiatedToDoLists = []
   for (var i = 0; i < toDoLists.length; i++) {
     var instantiatedTasks = []
     for(var j = 0; j < toDoLists[i].tasks.length; j++) {
-      var task = new Task(toDoLists[i].tasks[j].taskName)
+      var task = new Task(toDoLists[i].tasks[j].id, toDoLists[i].tasks[j].taskName, toDoLists[i].tasks[j].completed)
       instantiatedTasks.push(task)
     }
     var toDoList = new ToDoList(toDoLists[i].id, toDoLists[i].title, instantiatedTasks)
@@ -49,8 +48,13 @@ function displaySavedToDoLists(array) {
 function displaySavedTasks(array) {
   var individualTask = '';
   for (var i = 0; i < array.length; i++) {
+  if (array[i].completed == false) {
   individualTask +=
-  `<span class="task-list-item"><img src="assets/checkbox.svg">${array[i].taskName}</span>`
+  `<span class="task-list-item"><img class="checkbox" data-id=${array[i].id} src="assets/checkbox.svg">${array[i].taskName}</span>`
+} else {
+  individualTask +=
+  `<span class="task-list-item completed-task"><img class="checkbox" data-id=${array[i].id} src="assets/checkbox-active.svg">${array[i].taskName}</span>`
+}
   }
   return individualTask
 }
@@ -68,7 +72,7 @@ function checkTaskItemInput() {
 }
 
 function addNewTaskItem() {
-  var task = new Task(taskItemInput.value)
+  var task = new Task(Date.now(), taskItemInput.value)
   taskDraftList.innerHTML+=
   `<p class="draft-task" data-id=${task.id}>
   <img class='remove-task-btn' src="assets/delete.svg">${task.taskName}</p>`
@@ -117,7 +121,7 @@ function makeToDoList() {
     var tasksList = document.querySelector(`.task-list[data-id='${toDoList.id}']`)
     for (var i = 0; i < toDoList.tasks.length; i++) {
       tasksList.innerHTML+=
-      `<span class="task-list-item"><img class="checkbox" src="assets/checkbox.svg">${toDoList.tasks[i].taskName}</span>`
+      `<span class="task-list-item"><img class="checkbox" data-id=${toDoList.tasks[i].id} src="assets/checkbox.svg">${toDoList.tasks[i].taskName}</span>`
     }
  }
  toDoList.saveToStorage(toDoLists)
@@ -145,19 +149,20 @@ function clearToDoDraft() {
 }
 
 function markAsComplete(event) {
- taskListItem.forEach(function(task) {
-   console.log(task);
- })
+  var taskId = event.target.dataset.id
+  var listId = event.target.parentNode.parentNode.dataset.id
+  console.log(taskId);
+  console.log(listId);
+  if (event.target.classList.contains('checkbox')) {
+    event.target.src = "assets/checkbox-active.svg"
+    var taskListItem = event.target.closest('.task-list-item')
+    taskListItem.classList.add('completed-task')
+  }
+  completedIsTrue(taskId, listId)
 }
-  // if (event.target.className === 'checkbox') {
-  // var toDoListId = document.querySelector()
-  // for (var i = 0; i < toDoLists.length; i++) {
-  //   toDoLists.find(toDo => {
-  //     console.log(toDo)
-  //   })
-  // }
-//   event.target.innerHTML ==
-//   `<span class="task-list-item completed-task" data-id=${task.id}>
-//   <img class="checkbox" src="assets/checkbox-active.svg"></span>`
-//  }
-// }
+
+function completedIsTrue(taskId, listId) {
+  var toDoListInstance = toDoLists.find(list => list.id == listId)
+  console.log(toDoListInstance);
+  toDoListInstance.updateTask(taskId)
+}

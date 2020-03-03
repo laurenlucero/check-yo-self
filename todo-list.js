@@ -5,8 +5,11 @@ class ToDoList {
     this.tasks = tasks;
     this.urgent = false;
   }
+  addItemsToList() {
+    this.title = listTitleInput;
+    this.tasks.push(task)
+  }
   saveToStorage(array) {
-    // save to local storage
     localStorage.setItem('list', JSON.stringify(array))
   }
   getFromStorage(toDoList) {
@@ -16,18 +19,19 @@ class ToDoList {
     instantiateToDoLists()
     displaySavedToDoLists(toDoLists)
   }
-  addItemsToList() {
-    this.title = listTitleInput;
-    this.tasks.push(task)
-  }
   deleteFromStorage() {
     // remove from local storage
     localStorage.removeItem('list')
   }
-  updateToDo() {
-    // should update the todo's title and urgency
-  }
-  updateTask() {
+  updateTask(taskId) {
     // should update a task's content and if it has been completed
-  }
+  var completedTask = this.tasks.find(item => item.id == taskId)
+  console.log(completedTask.completed);
+  completedTask.completed = !completedTask.completed;
+  this.saveToStorage(toDoLists)
+  console.log(completedTask.completed);
+ }
+ updateToDo() {
+   // should update the todo's title and urgency
+ }
 }
