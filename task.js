@@ -1,7 +1,10 @@
 class Task {
-  constructor(name) {
-    this.id = Date.now()
+  constructor(id, name, completed) {
+    this.id = id
     this.taskName = name;
     this.completed = false;
+    if (completed === true) {
+      this.completed = true;
+    }
   }
 }
