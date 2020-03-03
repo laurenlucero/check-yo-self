@@ -7,7 +7,7 @@ var makeToDoListBtn = document.querySelector('.make-list-btn')
 var clearToDoDraftBtn = document.querySelector('.clear-btn')
 var taskCards = document.querySelector('main')
 var noToDosMsg = document.querySelector('.no-to-dos')
-var taskList = document.querySelector('.task-list')
+var taskListItem = document.querySelectorAll('.task-list-item')
 var draftTasks = []
 var toDoLists = []
 
@@ -16,7 +16,7 @@ addTaskItemBtn.addEventListener('click', checkTaskItemInput)
 taskDraftList.addEventListener('click', removeTaskDraftItem)
 makeToDoListBtn.addEventListener('click', makeToDoList)
 clearToDoDraftBtn.addEventListener('click', clearToDoDraft)
-taskList.addEventListener('click', markAsComplete)
+taskListItem.addEventListener('click', markAsComplete)
 
 function instantiateToDoLists() {
   var instantiatedToDoLists = []
@@ -50,7 +50,7 @@ function displaySavedTasks(array) {
   var individualTask = '';
   for (var i = 0; i < array.length; i++) {
   individualTask +=
-  `<span><img src="assets/checkbox.svg">${array[i].taskName}</span>`
+  `<span class="task-list-item"><img src="assets/checkbox.svg">${array[i].taskName}</span>`
   }
   return individualTask
 }
@@ -117,7 +117,7 @@ function makeToDoList() {
     var tasksList = document.querySelector(`.task-list[data-id='${toDoList.id}']`)
     for (var i = 0; i < toDoList.tasks.length; i++) {
       tasksList.innerHTML+=
-      `<span><img src="assets/checkbox.svg">${toDoList.tasks[i].taskName}</span>`
+      `<span class="task-list-item"><img class="checkbox" src="assets/checkbox.svg">${toDoList.tasks[i].taskName}</span>`
     }
  }
  toDoList.saveToStorage(toDoLists)
@@ -144,10 +144,20 @@ function clearToDoDraft() {
  }
 }
 
-function markAsComplete() {
-  if (event.target.className === '') {
-    tasksList.innerHTML+=
-    `<span><img src="assets/checkbox.svg">${}</span>`
+function markAsComplete(event) {
+ taskListItem.forEach(function(task) {
+   console.log(task);
+ })
 }
-
-// 'completed-task'
+  // if (event.target.className === 'checkbox') {
+  // var toDoListId = document.querySelector()
+  // for (var i = 0; i < toDoLists.length; i++) {
+  //   toDoLists.find(toDo => {
+  //     console.log(toDo)
+  //   })
+  // }
+//   event.target.innerHTML ==
+//   `<span class="task-list-item completed-task" data-id=${task.id}>
+//   <img class="checkbox" src="assets/checkbox-active.svg"></span>`
+//  }
+// }
