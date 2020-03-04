@@ -5,7 +5,6 @@ var taskDraftList = document.querySelector('.task-draft-list')
 var addTaskItemBtn = document.querySelector('.add-btn')
 var makeToDoListBtn = document.querySelector('.make-list-btn')
 var clearToDoDraftBtn = document.querySelector('.clear-btn')
-var deleteBtn = document.querySelector('.delete-btn')
 var taskCards = document.querySelector('main')
 var noToDosMsg = document.querySelector('.no-to-dos')
 var draftTasks = []
@@ -17,7 +16,6 @@ taskDraftList.addEventListener('click', removeTaskDraftItem)
 makeToDoListBtn.addEventListener('click', makeToDoList)
 clearToDoDraftBtn.addEventListener('click', clearToDoDraft)
 taskCards.addEventListener('click', markAsComplete)
-deleteBtn = addEventListener('click', deleteCard)
 
 function instantiateToDoLists() {
   var instantiatedToDoLists = []
@@ -153,6 +151,8 @@ function clearToDoDraft() {
 function markAsComplete(event) {
   var taskId = event.target.dataset.id
   var listId = event.target.parentNode.parentNode.dataset.id
+  console.log(taskId);
+  console.log(listId);
   if (event.target.classList.contains('checkbox')) {
     event.target.src = "assets/checkbox-active.svg"
     var taskListItem = event.target.closest('.task-list-item')
@@ -163,22 +163,6 @@ function markAsComplete(event) {
 
 function completedIsTrue(taskId, listId) {
   var toDoListInstance = toDoLists.find(list => list.id == listId)
+  console.log(toDoListInstance);
   toDoListInstance.updateTask(taskId)
 }
-
-function deleteCard(event) {
-  // BUG: deleting card even when click is off button
-
-  var cardToDelete = event.target.closest('.task-card')
-  console.log(cardToDelete);
-  cardToDelete.remove()
-
-  // toDoList.deleteFromStorage()
-
-  // card can only be deleted when all tasks are completed
-  // on click todo list should be removed from DOM and data model
-}
-
-// markCardUrgent() {}
-
-// filterByUrgency() {}
