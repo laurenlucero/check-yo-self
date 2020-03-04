@@ -26,6 +26,7 @@ The architecture of the application consists of one HTML file, one CSS file, and
 ## Screenshots of comp and your app
 #### Wireframe of desktop comp
 ![image](check-yo-self-comps/check-yo-self-desktop.jpg)
+Note: I ended up using a div container holding spans for the task items rather than an unordered list.
 #### My desktop recreation
 ![image](check-yo-self-comps/InitialDisplay.png)
 #### Add task comp
