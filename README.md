@@ -24,3 +24,8 @@ The architecture of the application consists of one HTML file, one CSS file, and
 - Overall understanding of JavaScript syntax, array prototypes, classes and objects (challenge and a win because it was hard but I learned from all the struggles!)
 
 ## Screenshots of comp and your app
+#### Wireframe of desktop comp
+![image](check-yo-self-comps/check-yo-self-desktop.jpg)
+#### My desktop
+
+####
