@@ -51,7 +51,7 @@ function displaySavedTasks(array) {
   if (array[i].completed == false) {
   individualTask +=
   `<span class="task-list-item"><img class="checkbox" data-id=${array[i].id} src="assets/checkbox.svg">${array[i].taskName}</span>`
-} else {
+} else if (array[i].completed == true) {
   individualTask +=
   `<span class="task-list-item completed-task"><img class="checkbox" data-id=${array[i].id} src="assets/checkbox-active.svg">${array[i].taskName}</span>`
 }
