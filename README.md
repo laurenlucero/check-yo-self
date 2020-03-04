@@ -6,7 +6,7 @@ Check Yo' Self is a checklist application. Users can create multiple to do lists
 
 ## Overview of technologies used, challenges, and wins, any other reflections
 Through this project, I demonstrated understanding of writing DRY JavaScript and using localStorage to persist data.
-I used for loops to iterate through and filter DOM elements. I solidified my understanding of the different between the data model and how data is displayed on the DOM. I used Atom, gitHub, DevTools and Google as tools. It was also helpful to have classmates, instructors and my mentor to rubber duck through problems and ideas.
+I used for loops to iterate through and filter DOM elements. I solidified my understanding of the different between the data model and how data is displayed on the DOM. I used Atom, gitHub, DevTools and Google as tools. It was also helpful to have classmates, instructors and a mentor to rubber duck through problems and ideas.
 The architecture of the application consists of one HTML file, one CSS file, and three JavaScript files. The todo-list.js file contains a ToDoList class which includes a constructor and the following methods: saveToStorage, getFromStorage, deleteFromStorage, updateToDo, and updateTask. The ToDoList data model includes an id, title, tasks, and urgent property. The task.js file contains a Task class and constructor. Task object instances are held in the ToDoList class tasks property. The main.js file contains all DOM related JavaScript.
 
 ### Challenges
@@ -21,11 +21,16 @@ The architecture of the application consists of one HTML file, one CSS file, and
 - Psuedo-coding and whiteboarding before programming deepened my understanding of JavaScript functionality
 - Using innerHTML and interpolation to display stored data on the DOM
 - Learning to reinstantiate object data after it is retrieved from local storage
-- Overall understanding of JavaScript syntax, array prototypes, classes and objects (challenge and a win because it was hard but I learned from all the struggles!)
+- Overall understanding of JavaScript syntax, array prototypes, classes and objects (This is a challenge and a win because it was hard but I learned from all the struggles!)
 
 ## Screenshots of comp and your app
 #### Wireframe of desktop comp
 ![image](check-yo-self-comps/check-yo-self-desktop.jpg)
-#### My desktop
-
-####
+#### My desktop recreation
+![image](check-yo-self-comps/InitialDisplay.png)
+#### Add task comp
+![image](check-yo-self-comps/check-yo-self-add-task.jpg)
+#### Add task recreation
+![image](check-yo-self-comps/DraftTaskList.png)
+#### Checked tasks recreation
+![image](check-yo-self-comps/ToDoListsCheckedTasks.png)
